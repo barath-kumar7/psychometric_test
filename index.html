@@ -554,7 +554,7 @@
             clone1.style.position = 'absolute';
             clone1.style.left = '-9999px';
             clone1.style.top = '0';
-            clone1.style.width = reportElement.offsetWidth + 'px';
+            clone1.style.width = '800px'; // Use a fixed width for consistent rendering
             clone1.classList.remove('bg-white/80', 'backdrop-blur-xl');
             clone1.classList.add('bg-white');
 
@@ -573,19 +573,37 @@
                 const pdf = new jsPDF('p', 'mm', 'a4');
                 const pdfWidth = pdf.internal.pageSize.getWidth();
                 const pdfHeight = pdf.internal.pageSize.getHeight();
-                const ratio1 = canvas1.width / canvas1.height;
-                const imgHeight1 = pdfWidth / ratio1;
-                pdf.addImage(imgData1, 'JPEG', 0, 0, pdfWidth, imgHeight1);
+                
+                // --- FIX: Proper scaling for page 1 ---
+                const canvasWidth = canvas1.width;
+                const canvasHeight = canvas1.height;
+                const pageRatio = canvasWidth / canvasHeight;
+                let pageImgHeight = pdfWidth / pageRatio;
+                let pageImgWidth = pdfWidth;
+                let xOffset = 0;
+                let yOffset = 0;
+
+                // If height is greater than page, scale to fit height and center horizontally
+                if (pageImgHeight > pdfHeight) {
+                    pageImgHeight = pdfHeight;
+                    pageImgWidth = pageImgHeight * pageRatio;
+                    xOffset = (pdfWidth - pageImgWidth) / 2;
+                }
+
+                pdf.addImage(imgData1, 'JPEG', xOffset, yOffset, pageImgWidth, pageImgHeight);
+
 
                 // Add clickable link to Page 1
                 const emailLineElement = clone1.querySelector('#report-email-line');
                 if (userData.email && emailLineElement) {
                     const emailRect = emailLineElement.getBoundingClientRect();
                     const cloneRect = clone1.getBoundingClientRect();
-                    const x_ratio = pdfWidth / clone1.offsetWidth;
-                    const y_ratio = imgHeight1 / clone1.offsetHeight;
-                    const pdfX = (emailRect.left - cloneRect.left) * x_ratio;
-                    const pdfY = (emailRect.top - cloneRect.top) * y_ratio;
+                    
+                    const x_ratio = pageImgWidth / clone1.offsetWidth;
+                    const y_ratio = pageImgHeight / clone1.offsetHeight;
+
+                    const pdfX = ((emailRect.left - cloneRect.left) * x_ratio) + xOffset;
+                    const pdfY = ((emailRect.top - cloneRect.top) * y_ratio) + yOffset;
                     const pdfLinkWidth = emailRect.width * x_ratio;
                     const pdfLinkHeight = emailRect.height * y_ratio;
                     const mailtoLink = `mailto:${userData.email}?subject=${encodeURIComponent(`Psychometric Report for ${userData.name}`)}&body=${encodeURIComponent('Hi,\n\nPlease see the attached report.\n\nBest regards.')}`;
@@ -624,15 +642,15 @@
 
                     const pageCanvas = await html2canvas(tempPageContainer, { scale: 3, useCORS: true, backgroundColor: '#ffffff' });
                     const pageImgData = pageCanvas.toDataURL('image/jpeg', 0.9);
-                    const pageRatio = pageCanvas.width / pageCanvas.height;
-                    let pageImgHeight = pdfWidth / pageRatio;
+                    const pageRatio2 = pageCanvas.width / pageCanvas.height;
+                    let pageImgHeight2 = pdfWidth / pageRatio2;
 
-                    if (pageImgHeight > pdfHeight) {
+                    if (pageImgHeight2 > pdfHeight) {
                         const adjustedHeight = pdfHeight - 20;
-                        const adjustedWidth = adjustedHeight * pageRatio;
+                        const adjustedWidth = adjustedHeight * pageRatio2;
                         pdf.addImage(pageImgData, 'JPEG', (pdfWidth - adjustedWidth) / 2, 10, adjustedWidth, adjustedHeight);
                     } else {
-                        pdf.addImage(pageImgData, 'JPEG', 0, 10, pdfWidth, pageImgHeight);
+                        pdf.addImage(pageImgData, 'JPEG', 0, 10, pdfWidth, pageImgHeight2);
                     }
                     document.body.removeChild(tempPageContainer);
                 }
@@ -649,6 +667,4 @@
     </script>
 </body>
 </html>
-
-
 
