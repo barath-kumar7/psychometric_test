@@ -544,10 +544,14 @@
         }
 
         async function generatePDF() {
+            const animationArea = document.querySelector('.animation-area');
             const reportElement = document.getElementById('report-content-to-pdf');
             const page2Container = document.getElementById('report-page-2-container');
             const buttonContainer = reportElement.querySelector('.mt-10.text-center');
+            
+            // --- FIX: Hide elements that might interfere with rendering ---
             buttonContainer.style.display = 'none';
+            if (animationArea) animationArea.style.display = 'none';
 
             // Page 1 Clone
             const clone1 = reportElement.cloneNode(true);
@@ -662,6 +666,7 @@
             } finally {
                 document.body.removeChild(clone1);
                 buttonContainer.style.display = 'block';
+                 if (animationArea) animationArea.style.display = 'block';
             }
         }
     </script>
