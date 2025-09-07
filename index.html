@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Success Traits Psychometric Test</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- jsPDF and html2canvas for PDF generation -->
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"><
+/script>
+<style>
+@import
+url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=
+swap');
+body {
+font-family: 'Manrope', sans-serif;
+margin: 0;
+}
+.animation-area {
+background: linear-gradient(-45deg, #fbc2eb 0%, #a6c1ee 100%);
+background-size: 400% 400%;
+animation: gradientBG 15s ease infinite;
+width: 100%;
+height: 100vh;
+position: fixed;
+top: 0;
+left: 0;
+z-index: -1;
+}
+.shape-container {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+overflow: hidden;
+}
+.shape {
+position: absolute;
+display: block;
+list-style: none;
+width: 20px;
+height: 20px;
+
+animation: floatUp 25s linear infinite;
+bottom: -150px;
+color: white;
+}
+.shape svg {
+width: 100%;
+height: 100%;
+opacity: 0.3;
+}
+.shape:nth-child(1) { left: 25%; width: 80px; height: 80px;
+animation-delay: 0s; }
+.shape:nth-child(2) { left: 10%; width: 30px; height: 30px;
+animation-delay: 2s; animation-duration: 12s; }
+.shape:nth-child(3) { left: 70%; width: 30px; height: 30px;
+animation-delay: 4s; }
+.shape:nth-child(4) { left: 40%; width: 60px; height: 60px;
+animation-delay: 0s; animation-duration: 18s; }
+.shape:nth-child(5) { left: 65%; width: 20px; height: 20px;
+animation-delay: 0s; }
+.shape:nth-child(6) { left: 75%; width: 110px; height: 110px;
+animation-delay: 3s; }
+.shape:nth-child(7) { left: 35%; width: 150px; height: 150px;
+animation-delay: 7s; }
+.shape:nth-child(8) { left: 50%; width: 25px; height: 25px;
+animation-delay: 15s; animation-duration: 45s; }
+.shape:nth-child(9) { left: 20%; width: 15px; height: 15px;
+animation-delay: 2s; animation-duration: 35s; }
+.shape:nth-child(10) { left: 85%; width: 150px; height: 150px;
+animation-delay: 0s; animation-duration: 11s; }
+.shape:nth-child(11) { left: 55%; width: 40px; height: 40px;
+animation-delay: 1s; animation-duration: 20s; }
+.shape:nth-child(12) { left: 5%; width: 25px; height: 25px;
+animation-delay: 5s; animation-duration: 15s; }
+.shape:nth-child(13) { left: 80%; width: 50px; height: 50px;
+animation-delay: 8s; animation-duration: 22s; }
+.shape:nth-child(14) { left: 30%; width: 90px; height: 90px;
+animation-delay: 10s; animation-duration: 16s; }
+.shape:nth-child(15) { left: 90%; width: 20px; height: 20px;
+animation-delay: 6s; animation-duration: 30s; }
+.shape:nth-child(16) { left: 15%; width: 20px; height: 20px;
+animation-delay: 9s; animation-duration: 28s; }
+.shape:nth-child(17) { left: 45%; width: 70px; height: 70px;
+animation-delay: 12s; animation-duration: 24s; }
+.shape:nth-child(18) { left: 60%; width: 30px; height: 30px;
+animation-delay: 14s; animation-duration: 19s; }
+.shape:nth-child(19) { left: 95%; width: 40px; height: 40px;
+animation-delay: 11s; animation-duration: 33s; }
+.shape:nth-child(20) { left: 28%; width: 28px; height: 28px;
+
+animation-delay: 16s; animation-duration: 21s; }
+
+@keyframes gradientBG {
+0% { background-position: 0% 50%; }
+50% { background-position: 100% 50%; }
+100% { background-position: 0% 50%; }
+}
+@keyframes floatUp {
+0% {
+transform: translateY(0) rotate(0deg);
+opacity: 1;
+}
+100% {
+transform: translateY(-1000px) rotate(720deg);
+opacity: 0;
+}
+}
+.container-wrapper { display: none; }
+.container-wrapper.active { display: block; }
+.fade-in { animation: fadeIn 0.7s ease-in-out; }
+.slide-in-up { animation: slideInUp 0.7s ease-in-out forwards; }
+@keyframes fadeIn {
+from { opacity: 0; transform: scale(0.95); }
+to { opacity: 1; transform: scale(1); }
+}
+@keyframes slideInUp {
+from { transform: translateY(30px); opacity: 0; }
+to { transform: translateY(0); opacity: 1; }
+}
+.progress-bar-fill { transition: width 0.4s ease-in-out; }
+.option-btn { transition: all 0.2s ease-in-out; }
+.option-btn:hover {
+transform: translateX(10px);
+background-color: #e0e7ff; /* indigo-100 */
+}
+</style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+<div class="animation-area">
+<ul class="shape-container">
+<li class="shape">
+<svg viewBox="0 0 24 24" fill="currentColor"
+
+xmlns="http://www.w3.org/2000/svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28
+2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3
+22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+</li>
+<li class="shape">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+fill="currentColor" class="w-6 h-6"><path fill-rule="evenodd" d="M12 2.25c-5.385
+0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12
+2.25Zm-.53 14.03a.75.75 0 0 0 1.06 0l3-3a.75.75 0 1 0-1.06-1.06l-1.72
+1.72V8.25a.75.75 0 0 0-1.5 0v5.69l-1.72-1.72a.75.75 0 0 0-1.06 1.06l3 3Z"
+clip-rule="evenodd" /></svg>
+</li>
+<li class="shape">
+<svg viewBox="0 0 24 24" fill="currentColor"
+xmlns="http://www.w3.org/2000/svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28
+2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3
+22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+</li>
+<li class="shape">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+fill="currentColor" class="w-6 h-6"><path fill-rule="evenodd" d="M12 2.25c-5.385
+0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12
+2.25Zm-.53 14.03a.75.75 0 0 0 1.06 0l3-3a.75.75 0 1 0-1.06-1.06l-1.72
+1.72V8.25a.75.75 0 0 0-1.5 0v5.69l-1.72-1.72a.75.75 0 0 0-1.06 1.06l3 3Z"
+clip-rule="evenodd" /></svg>
+</li>
+<li class="shape">
+<svg viewBox="0 0 24 24" fill="currentColor"
+xmlns="http://www.w3.org/2000/svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28
+2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3
+22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+</li>
+<li class="shape">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+fill="currentColor" class="w-6 h-6"><path fill-rule="evenodd" d="M12 2.25c-5.385
+0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12
+2.25Zm-.53 14.03a.75.75 0 0 0 1.06 0l3-3a.75.75 0 1 0-1.06-1.06l-1.72
+1.72V8.25a.75.75 0 0 0-1.5 0v5.69l-1.72-1.72a.75.75 0 0 0-1.06 1.06l3 3Z"
+clip-rule="evenodd" /></svg>
+</li>
+<li class="shape">
+<svg viewBox="0 0 24 24" fill="currentColor"
+xmlns="http://www.w3.org/2000/svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28
+2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3
+22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+</li>
+<li class="shape">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+fill="currentColor" class="w-6 h-6"><path fill-rule="evenodd" d="M12 2.25c-5.385
+0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12
+
+2.25Zm-.53 14.03a.75.75 0 0 0 1.06 0l3-3a.75.75 0 1 0-1.06-1.06l-1.72
+1.72V8.25a.75.75 0 0 0-1.5 0v5.69l-1.72-1.72a.75.75 0 0 0-1.06 1.06l3 3Z"
+clip-rule="evenodd" /></svg>
+</li>
+<li class="shape">
+<svg viewBox="0 0 24 24" fill="currentColor"
+xmlns="http://www.w3.org/2000/svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28
+2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3
+22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+</li>
+<li class="shape">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+fill="currentColor" class="w-6 h-6"><path fill-rule="evenodd" d="M12 2.25c-5.385
+0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12
+2.25Zm-.53 14.03a.75.75 0 0 0 1.06 0l3-3a.75.75 0 1 0-1.06-1.06l-1.72
+1.72V8.25a.75.75 0 0 0-1.5 0v5.69l-1.72-1.72a.75.75 0 0 0-1.06 1.06l3 3Z"
+clip-rule="evenodd" /></svg>
+</li>
+<li class="shape">
+<svg viewBox="0 0 24 24" fill="currentColor"
+xmlns="http://www.w3.org/2000/svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28
+2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3
+22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+</li>
+<li class="shape">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+fill="currentColor" class="w-6 h-6"><path fill-rule="evenodd" d="M12 2.25c-5.385
+0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12
+2.25Zm-.53 14.03a.75.75 0 0 0 1.06 0l3-3a.75.75 0 1 0-1.06-1.06l-1.72
+1.72V8.25a.75.75 0 0 0-1.5 0v5.69l-1.72-1.72a.75.75 0 0 0-1.06 1.06l3 3Z"
+clip-rule="evenodd" /></svg>
+</li>
+<li class="shape">
+<svg viewBox="0 0 24 24" fill="currentColor"
+xmlns="http://www.w3.org/2000/svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28
+2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3
+22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+</li>
+<li class="shape">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+fill="currentColor" class="w-6 h-6"><path fill-rule="evenodd" d="M12 2.25c-5.385
+0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12
+2.25Zm-.53 14.03a.75.75 0 0 0 1.06 0l3-3a.75.75 0 1 0-1.06-1.06l-1.72
+1.72V8.25a.75.75 0 0 0-1.5 0v5.69l-1.72-1.72a.75.75 0 0 0-1.06 1.06l3 3Z"
+clip-rule="evenodd" /></svg>
+</li>
+<li class="shape">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+fill="currentColor" class="w-6 h-6"><path fill-rule="evenodd" d="M12 2.25c-5.385
+0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12
+
+2.25Zm-.53 14.03a.75.75 0 0 0 1.06 0l3-3a.75.75 0 1 0-1.06-1.06l-1.72
+1.72V8.25a.75.75 0 0 0-1.5 0v5.69l-1.72-1.72a.75.75 0 0 0-1.06 1.06l3 3Z"
+clip-rule="evenodd" /></svg>
+</li>
+<li class="shape">
+<svg viewBox="0 0 24 24" fill="currentColor"
+xmlns="http://www.w3.org/2000/svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28
+2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3
+22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+</li>
+<li class="shape">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+fill="currentColor" class="w-6 h-6"><path fill-rule="evenodd" d="M12 2.25c-5.385
+0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12
+2.25Zm-.53 14.03a.75.75 0 0 0 1.06 0l3-3a.75.75 0 1 0-1.06-1.06l-1.72
+1.72V8.25a.75.75 0 0 0-1.5 0v5.69l-1.72-1.72a.75.75 0 0 0-1.06 1.06l3 3Z"
+clip-rule="evenodd" /></svg>
+</li>
+<li class="shape">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+fill="currentColor" class="w-6 h-6"><path fill-rule="evenodd" d="M12 2.25c-5.385
+0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12
+2.25Zm-.53 14.03a.75.75 0 0 0 1.06 0l3-3a.75.75 0 1 0-1.06-1.06l-1.72
+1.72V8.25a.75.75 0 0 0-1.5 0v5.69l-1.72-1.72a.75.75 0 0 0-1.06 1.06l3 3Z"
+clip-rule="evenodd" /></svg>
+</li>
+<li class="shape">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+fill="currentColor" class="w-6 h-6"><path fill-rule="evenodd" d="M12 2.25c-5.385
+0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12
+2.25Zm-.53 14.03a.75.75 0 0 0 1.06 0l3-3a.75.75 0 1 0-1.06-1.06l-1.72
+1.72V8.25a.75.75 0 0 0-1.5 0v5.69l-1.72-1.72a.75.75 0 0 0-1.06 1.06l3 3Z"
+clip-rule="evenodd" /></svg>
+</li>
+<li class="shape">
+<svg viewBox="0 0 24 24" fill="currentColor"
+xmlns="http://www.w3.org/2000/svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28
+2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3
+22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+</li>
+</ul>
+</div >
+<div class="w-full max-w-3xl mx-auto relative z-10">
+<!-- User Information Form -->
+<div id="form-container" class="container-wrapper active fade-in">
+<div class="bg-white/80 backdrop-blur-xl p-8 md:p-12 rounded-2xl
+shadow-2xl">
+<h2 class="text-2xl font-bold text-center text-gray-700
+mb-2">Excel Engineering College (Autonomous), Namakkal</h2>
+
+<h1 class="text-4xl font-extrabold text-center mb-8
+text-gray-900">Student Success Traits Psychometric Test</h1>
+<form id="user-form">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label for="name" class="block text-sm font-semibold
+text-gray-700">Name</label>
+<input type="text" id="name" name="name" required
+class="mt-1 block w-full px-4 py-3 bg-white border border-gray-300 rounded-lg
+shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2
+focus:ring-indigo-500 focus:border-transparent sm:text-sm">
+</div>
+<div>
+<label for="roll-number" class="block text-sm
+font-semibold text-gray-700">Roll Number</label>
+<input type="text" id="roll-number" name="roll-number"
+required class="mt-1 block w-full px-4 py-3 bg-white border border-gray-300
+rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2
+focus:ring-indigo-500 focus:border-transparent sm:text-sm">
+</div>
+<div>
+<label for="email" class="block text-sm font-semibold
+text-gray-700">Email</label>
+<input type="email" id="email" name="email" required
+class="mt-1 block w-full px-4 py-3 bg-white border border-gray-300 rounded-lg
+shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2
+focus:ring-indigo-500 focus:border-transparent sm:text-sm">
+</div>
+<div>
+<label for="phone" class="block text-sm font-semibold
+text-gray-700">Phone Number</label>
+<input type="tel" id="phone" name="phone" required
+class="mt-1 block w-full px-4 py-3 bg-white border border-gray-300 rounded-lg
+shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2
+focus:ring-indigo-500 focus:border-transparent sm:text-sm">
+</div>
+<div>
+<label for="dept" class="block text-sm font-semibold
+text-gray-700">Department</label>
+<input type="text" id="dept" name="dept" required
+class="mt-1 block w-full px-4 py-3 bg-white border border-gray-300 rounded-lg
+shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2
+focus:ring-indigo-500 focus:border-transparent sm:text-sm">
+</div>
+<div>
+<label for="section" class="block text-sm font-semibold
+text-gray-700">Section</label>
+<input type="text" id="section" name="section" required
+class="mt-1 block w-full px-4 py-3 bg-white border border-gray-300 rounded-lg
+shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2
+
+focus:ring-indigo-500 focus:border-transparent sm:text-sm">
+</div>
+</div>
+<div class="mt-10 text-center">
+<button type="submit" class="w-full md:w-auto bg-indigo-600
+text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-indigo-700
+focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
+transition-transform transform hover:scale-105">Start Quiz</button>
+</div>
+</form>
+</div>
+</div>
+<!-- Quiz Container -->
+<div id="quiz-container" class="container-wrapper">
+<div class="bg-white/80 backdrop-blur-xl p-8 md:p-12 rounded-2xl
+shadow-2xl">
+<div id="progress-bar-container" class="w-full bg-gray-200
+rounded-full h-3 mb-8">
+<div id="progress-bar-fill" class="bg-indigo-600 h-3
+rounded-full progress-bar-fill" style="width: 0%"></div>
+</div>
+<h2 id="question-text" class="text-2xl md:text-3xl font-bold mb-8
+text-gray-800 leading-tight"></h2>
+<div id="options-container" class="space-y-4"></div>
+</div>
+</div>
+<!-- Report Container -->
+<div id="report-container" class="container-wrapper">
+<div id="report-content-to-pdf" class="bg-white/80 backdrop-blur-xl p-8
+md:p-12 rounded-2xl shadow-2xl">
+<h2 class="text-2xl font-bold text-center text-gray-700
+mb-2">Excel Engineering College (Autonomous), Namakkal</h2>
+<h1 class="text-4xl font-extrabold text-center mb-4
+text-gray-900">Your Psychometric Report</h1>
+<div id="user-details-container" class="text-left text-sm
+text-gray-700 my-6 border-y py-4">
+<!-- User details will be populated here -->
+</div>
+<div class="text-center mb-8">
+<div class="relative w-48 h-48 mx-auto">
+<svg class="w-full h-full" viewBox="0 0 36 36">
+<path class="text-gray-200" d="M18 2.0845 a 15.9155
+15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none"
+stroke="currentColor" stroke-width="3"></path>
+<path id="score-circle" class="text-indigo-600"
+stroke-width="3" stroke-linecap="round" stroke-dasharray="0, 100" d="M18 2.0845 a
+
+15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none"
+stroke="currentColor"></path>
+</svg>
+<div class="absolute inset-0 flex items-center
+justify-center">
+<span id="final-score" class="text-6xl font-extrabold
+text-indigo-600"></span>
+</div>
+</div>
+</div>
+<div id="report-content" class="slide-in-up opacity-0">
+<h2 id="report-title" class="text-3xl font-bold text-center
+text-gray-800 mb-4"></h2>
+<div class="bg-gray-50/50 p-6 rounded-lg">
+<p class="font-semibold text-gray-800 mb-2 text-lg">Overall
+Feedback:</p>
+<p id="report-feedback" class="text-gray-700 mb-4
+leading-relaxed text-justify"></p>
+<p class="font-semibold text-gray-800 mb-2
+text-lg">Detailed Recommendations:</p>
+<ul id="report-recommendations" class="list-disc
+list-inside text-gray-700 space-y-2 leading-relaxed text-justify"></ul>
+</div>
+</div>
+<div class="mt-10 text-center space-y-4 md:space-y-0
+md:space-x-4">
+<button id="download-pdf-btn" class="w-full md:w-auto
+bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-green-700
+focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500
+transition-transform transform hover:scale-105">Download Again</button>
+<button id="retake-quiz-btn" class="w-full md:w-auto
+bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg shadow-md
+hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2
+focus:ring-indigo-500 transition-transform transform hover:scale-105">Retake
+Quiz</button>
+<button id="email-pdf-btn" class="w-full md:w-auto
+bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-blue-700
+focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
+transition-transform transform hover:scale-105">Email Report</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Hidden container for the second page of the PDF -->
+<div id="report-page-2-container" style="position: absolute; left: -9999px;
+top: 0; background: white; padding: 2rem; font-family: 'Manrope', sans-serif;">
+<h2 class="text-3xl font-extrabold text-center mb-6 text-gray-900">Detailed
+Sectional Analysis</h2>
+
+<div id="detailed-analysis-content" class="space-y-6">
+<!-- Detailed feedback will be populated here -->
+</div>
+</div>
+
+<script>
+const { jsPDF } = window.jspdf;
+const questions = [
+{ question: "You are attending your first day of college, and during a
+break, you see a group of students talking and laughing together. What do you do?",
+options: [ { text: "Walk over, introduce yourself, and join the conversation.",
+score: 5 }, { text: "Wait nearby, hoping someone invites you into the group.",
+score: 4 }, { text: "Smile and nod but don’t speak unless asked something.", score:
+3 }, { text: "Sit alone and focus on your phone.", score: 2 }, { text: "Avoid the
+group completely and leave the area.", score: 1 } ] },
+{ question: "During a class presentation, the teacher asks for
+volunteers to present first. What is your response?", options: [ { text: "Raise
+your hand immediately and start confidently.", score: 5 }, { text: "Volunteer after
+thinking for a while.", score: 4 }, { text: "Present only if the teacher calls your
+name.", score: 3 }, { text: "Try to avoid presenting by looking busy.", score: 2 },
+{ text: "Refuse to present and give an excuse.", score: 1 } ] },
+{ question: "You are assigned to work with three classmates you’ve
+never met before. What is your first step?", options: [ { text: "Introduce
+yourself, ask about their ideas, and share yours openly.", score: 5 }, { text:
+"Listen first, then share your thoughts.", score: 4 }, { text: "Wait until someone
+asks for your opinion.", score: 3 }, { text: "Only speak when you strongly
+disagree.", score: 2 }, { text: "Avoid speaking and let others handle everything.",
+score: 1 } ] },
+{ question: "You are at a career fair and see a company you are
+interested in. There’s no one in line at their stall. What do you do?", options: [
+{ text: "Walk straight to the representative, greet them, and ask about
+opportunities.", score: 5 }, { text: "Take a few minutes to prepare your questions
+before going.", score: 4 }, { text: "Wait for another student to go first, then
+follow.", score: 3 }, { text: "Collect a brochure quietly and leave.", score: 2 },
+{ text: "Skip the stall because you feel nervous.", score: 1 } ] },
+{ question: "Your friend is upset about a low grade and wants to talk.
+How do you respond?", options: [ { text: "Listen carefully, show empathy, and
+suggest ways to improve.", score: 5 }, { text: "Listen and say encouraging words.",
+score: 4 }, { text: "Change the topic to something positive.", score: 3 }, { text:
+"Offer quick advice without listening much.", score: 2 }, { text: "Avoid the
+conversation because you feel uncomfortable.", score: 1 } ] },
+{ question: "Your class is planning a cultural event, but no one is
+taking the lead to organize it. What do you do?", options: [ { text: "Volunteer to
+take charge, assign tasks, and keep track of progress.", score: 5 }, { text:
+"Suggest forming a small committee and offer to help actively.", score: 4 }, {
+text: "Wait for someone else to start, then join in later.", score: 3 }, { text:
+"Offer to help only with specific tasks you like.", score: 2 }, { text: "Stay out
+of the planning completely.", score: 1 } ] },
+{ question: "During a group project, your team misses a deadline. The
+
+teacher is unhappy. How do you respond?", options: [ { text: "Take responsibility,
+explain the issue, and propose a new plan.", score: 5 }, { text: "Help the group
+create a recovery plan.", score: 4 }, { text: "Wait for the leader to take
+action.", score: 3 }, { text: "Let others handle it and just do your assigned
+part.", score: 2 }, { text: "Avoid involvement and let the group deal with it.",
+score: 1 } ] },
+{ question: "You notice that your college club hasn’t been active
+lately. What’s your approach?", options: [ { text: "Call a meeting, gather ideas,
+and restart activities.", score: 5 }, { text: "Suggest a few new ideas to the
+leader.", score: 4 }, { text: "Wait for someone to make the first move.", score: 3
+}, { text: "Participate only if someone invites you.", score: 2 }, { text: "Ignore
+it and focus on other things.", score: 1 } ] },
+{ question: "A visiting speaker cancels at the last moment, and your
+teacher asks if anyone can fill in with a short talk. What would you do?", options:
+[ { text: "Immediately volunteer and deliver a talk on a topic you know well.",
+score: 5 }, { text: "Offer to speak after a short preparation time.", score: 4 }, {
+text: "Speak only if absolutely needed.", score: 3 }, { text: "Suggest someone else
+for the task.", score: 2 }, { text: "Avoid involvement.", score: 1 } ] },
+{ question: "Your friends are confused about how to register for an
+important online exam. What do you do?", options: [ { text: "Find the details and
+guide everyone step-by-step.", score: 5 }, { text: "Share the link and basic
+instructions.", score: 4 }, { text: "Tell them to search for the details online.",
+score: 3 }, { text: "Give vague directions but not much help.", score: 2 }, { text:
+"Ignore their request for help.", score: 1 } ] },
+{ question: "While working on a science project, the materials you
+ordered don’t arrive on time. What’s your reaction?", options: [ { text: "Quickly
+find alternative materials and adjust the plan.", score: 5 }, { text: "Contact the
+supplier and wait for their response, preparing a backup idea.", score: 4 }, {
+text: "Wait until the materials arrive before doing anything.", score: 3 }, { text:
+"Ask the teacher to change the deadline.", score: 2 }, { text: "Give up on the
+project.", score: 1 } ] },
+{ question: "During a coding competition, your program keeps showing an
+error. What do you do?", options: [ { text: "Break the problem into smaller parts
+and debug step-by-step.", score: 5 }, { text: "Try a different approach after
+checking the main issue.", score: 4 }, { text: "Ask for hints from others before
+trying yourself.", score: 3 }, { text: "Keep trying random changes until it
+works.", score: 2 }, { text: "Quit the competition.", score: 1 } ] },
+{ question: "Your hostel water supply suddenly stops, and you need to
+get ready for class. What would you do?", options: [ { text: "Quickly arrange water
+from a nearby source and inform others.", score: 5 }, { text: "Borrow water from a
+friend’s room and manage.", score: 4 }, { text: "Wait until the water supply is
+restored.", score: 3 }, { text: "Skip class due to inconvenience.", score: 2 }, {
+text: "Do nothing and complain.", score: 1 } ] },
+{ question: "You are working in a team, and two members disagree
+strongly about the approach. How do you respond?", options: [ { text: "Listen to
+both sides, find common ground, and suggest a compromise.", score: 5 }, { text:
+"Encourage them to try both approaches on a small scale first.", score: 4 }, {
+text: "Let them decide on their own without getting involved.", score: 3 }, { text:
+"Support one person without hearing the other side.", score: 2 }, { text: "Walk
+away from the conflict.", score: 1 } ] },
+
+{ question: "Your mathematics teacher assigns a tough problem as
+homework. What is your approach?", options: [ { text: "Research, break it into
+steps, and try until you solve it.", score: 5 }, { text: "Look for examples and
+practice similar problems before trying.", score: 4 }, { text: "Ask a classmate for
+the answer.", score: 3 }, { text: "Copy the solution from someone.", score: 2 }, {
+text: "Leave it unsolved.", score: 1 } ] },
+{ question: "Your assignment is due in a week. How do you plan your
+work?", options: [ { text: "Break it into smaller tasks and finish before the
+deadline.", score: 5 }, { text: "Start early but finish it just before the due
+date.", score: 4 }, { text: "Begin a day before the deadline.", score: 3 }, { text:
+"Do it on the last night in a rush.", score: 2 }, { text: "Submit late or not at
+all.", score: 1 } ] },
+{ question: "It’s exam week, and a friend invites you for a late-night
+gaming session. What do you do?", options: [ { text: "Politely decline and focus on
+study.", score: 5 }, { text: "Join for a short time, then return to studying.",
+score: 4 }, { text: "Join and study later in the night.", score: 3 }, { text: "Skip
+studying for the night.", score: 2 }, { text: "Play all night and ignore the exam
+prep.", score: 1 } ] },
+{ question: "You set a personal goal to read 20 pages of a book daily.
+One day you feel tired. What happens?", options: [ { text: "Still read 20 pages to
+keep the streak.", score: 5 }, { text: "Read at least half and make up for it the
+next day.", score: 4 }, { text: "Skip for the day without planning to catch up.",
+score: 3 }, { text: "Skip multiple days before continuing.", score: 2 }, { text:
+"Quit the goal entirely.", score: 1 } ] },
+{ question: "While preparing for a project, you find yourself
+distracted by social media. How do you respond?", options: [ { text: "Turn off
+notifications and focus fully on the task.", score: 5 }, { text: "Use social media
+only during scheduled breaks.", score: 4 }, { text: "Keep checking occasionally
+while working.", score: 3 }, { text: "Spend more time on social media than on the
+task.", score: 2 }, { text: "Forget about the project completely.", score: 1 } ] },
+{ question: "You have multiple deadlines approaching. What’s your
+strategy?", options: [ { text: "Prioritize tasks, set mini-deadlines, and track
+progress daily.", score: 5 }, { text: "Work on the most urgent first, then handle
+others.", score: 4 }, { text: "Do whichever task you feel like at the moment.",
+score: 3 }, { text: "Delay the harder ones until last.", score: 2 }, { text: "Leave
+most of them unfinished.", score: 1 } ] },
+{ question: "You worked hard for a competition but didn’t win. What’s
+your reaction?", options: [ { text: "Reflect on what went wrong and try again with
+improvements.", score: 5 }, { text: "Take a short break, then get back to
+practice.", score: 4 }, { text: "Feel disappointed but still participate next
+time.", score: 3 }, { text: "Avoid similar competitions in the future.", score: 2
+}, { text: "Give up on competitions altogether.", score: 1 } ] },
+{ question: "A group project member quits suddenly before the
+submission date. How do you handle it?", options: [ { text: "Quickly reassign tasks
+and ensure timely completion.", score: 5 }, { text: "Take extra work on yourself
+and finish on time.", score: 4 }, { text: "Submit with some incomplete parts.",
+score: 3 }, { text: "Request deadline extension without much effort to adjust.",
+score: 2 }, { text: "Leave the project unfinished.", score: 1 } ] },
+{ question: "You are juggling multiple responsibilities and feel
+stressed. What’s your approach?", options: [ { text: "Use relaxation techniques and
+
+manage tasks systematically.", score: 5 }, { text: "Ask for help and prioritize
+tasks.", score: 4 }, { text: "Continue working under stress without any plan.",
+score: 3 }, { text: "Avoid tasks and hope stress reduces on its own.", score: 2 },
+{ text: "Give up on most tasks due to stress.", score: 1 } ] },
+{ question: "A sudden change in the exam schedule disrupts your study
+plan. What do you do?", options: [ { text: "Quickly adjust the plan and keep
+studying.", score: 5 }, { text: "Make partial adjustments and continue.", score: 4
+}, { text: "Study as per the old plan despite changes.", score: 3 }, { text: "Get
+confused and study less.", score: 2 }, { text: "Stop studying until you feel ready
+again.", score: 1 } ] },
+{ question: "You receive constructive criticism from your teacher in
+front of peers. How do you react?", options: [ { text: "Accept it positively and
+use it to improve.", score: 5 }, { text: "Feel slightly embarrassed but still work
+on the feedback.", score: 4 }, { text: "Accept it outwardly but ignore the
+advice.", score: 3 }, { text: "Feel insulted and reduce participation in class.",
+score: 2 }, { text: "Become defensive and argue back.", score: 1 } ] },
+{ question: "You are given a math problem that looks complicated at
+first glance. What’s your reaction?", options: [ { text: "Break it into smaller
+parts and solve step by step.", score: 5 }, { text: "Try a few methods until one
+works.", score: 4 }, { text: "Ask a friend for hints before trying again.", score:
+3 }, { text: "Skip it and hope to solve it later.", score: 2 }, { text: "Leave it
+completely.", score: 1 } ] },
+{ question: "During a school event, the sound system fails. What do you
+do?", options: [ { text: "Quickly identify the issue and find an alternate
+solution.", score: 5 }, { text: "Call the technical team immediately and assist
+them.", score: 4 }, { text: "Wait for others to handle it.", score: 3 }, { text:
+"Suggest postponing the event.", score: 2 }, { text: "Walk away and do nothing.",
+score: 1 } ] },
+{ question: "Your team can’t agree on a project approach. How do you
+proceed?", options: [ { text: "Facilitate discussion, weigh pros & cons, and decide
+together.", score: 5 }, { text: "Take a vote and go with the majority.", score: 4
+}, { text: "Let someone else decide.", score: 3 }, { text: "Do the part you want
+without worrying about team consensus.", score: 2 }, { text: "Refuse to work unless
+your idea is chosen.", score: 1 } ] },
+{ question: "A friend seeks advice about choosing between two career
+paths. You:", options: [ { text: "Ask about their interests, strengths, and future
+goals before advising.", score: 5 }, { text: "Share your opinion with reasons and
+examples.", score: 4 }, { text: "Give a quick answer based on your preference.",
+score: 3 }, { text: "Tell them to decide alone without your input.", score: 2 }, {
+text: "Avoid answering altogether.", score: 1 } ] },
+{ question: "You are designing a science project but some materials are
+unavailable. How do you handle it?", options: [ { text: "Find substitutes and
+modify the design to work.", score: 5 }, { text: "Borrow materials from another
+team or source.", score: 4 }, { text: "Continue without the missing parts, even if
+incomplete.", score: 3 }, { text: "Delay the project until you get the exact
+materials.", score: 2 }, { text: "Drop the project entirely.", score: 1 } ] },
+{ question: "You have a big assignment due in a week. When do you start
+working on it?", options: [ { text: "Immediately, breaking it into daily goals.",
+score: 5 }, { text: "Start within a day or two, with a clear plan.", score: 4 }, {
+text: "Work on it two or three days before the deadline.", score: 3 }, { text:
+
+"Begin the night before it’s due.", score: 2 }, { text: "Wait until the last moment
+and rush through it.", score: 1 } ] },
+{ question: "You need to prepare for an exam, but a friend invites you
+to a party tonight. What do you do?", options: [ { text: "Politely decline and
+focus on studying.", score: 5 }, { text: "Study first, then attend briefly if time
+permits.", score: 4 }, { text: "Attend the party and plan to study tomorrow.",
+score: 3 }, { text: "Go to the party and skip studying.", score: 2 }, { text:
+"Forget about the exam completely for now.", score: 1 } ] },
+{ question: "You promised yourself to read for 30 minutes daily. After
+a busy day, you feel tired. What happens?", options: [ { text: "Read anyway, even
+if for a shorter time.", score: 5 }, { text: "Try to read but may reduce the
+time.", score: 4 }, { text: "Skip for one day and resume tomorrow.", score: 3 }, {
+text: "Skip and don’t try to catch up.", score: 2 }, { text: "Drop the habit
+entirely.", score: 1 } ] },
+{ question: "Your teacher gives you multiple homework tasks due in
+three days. How do you approach them?", options: [ { text: "Make a plan to finish
+each task on different days.", score: 5 }, { text: "Do the harder ones first and
+then the easier ones.", score: 4 }, { text: "Work randomly on whichever feels
+easier at the moment.", score: 3 }, { text: "Leave them until the last day.",
+score: 2 }, { text: "Complete only a few and skip the rest.", score: 1 } ] },
+{ question: "You set a personal goal to improve your fitness. How do
+you ensure you stick to it?", options: [ { text: "Follow a schedule and track
+progress daily.", score: 5 }, { text: "Keep a reminder and adjust the plan if
+needed.", score: 4 }, { text: "Follow the routine when you feel motivated.", score:
+3 }, { text: "Exercise occasionally without a plan.", score: 2 }, { text: "Give up
+after missing a few days.", score: 1 } ] },
+{ question: "Your school is planning an annual day, and you’re asked to
+suggest an idea for a unique event. What do you do?", options: [ { text: "Propose a
+completely new and original concept.", score: 5 }, { text: "Adapt an existing idea
+with creative changes.", score: 4 }, { text: "Suggest a standard idea that’s easy
+to execute.", score: 3 }, { text: "Wait for others to suggest, then support one.",
+score: 2 }, { text: "Stay quiet and let others decide.", score: 1 } ] },
+{ question: "You face a problem in a group project because some
+resources are missing. How do you react?", options: [ { text: "Think of alternative
+ways or materials to complete the task.", score: 5 }, { text: "Modify the plan
+slightly to use what’s available.", score: 4 }, { text: "Ask someone else for a
+ready-made solution.", score: 3 }, { text: "Complain about the missing resources.",
+score: 2 }, { text: "Give up on the task until resources arrive.", score: 1 } ] },
+{ question: "While doing a science project, you get an unexpected
+result. What’s your next step?", options: [ { text: "Explore why it happened and
+find new possibilities.", score: 5 }, { text: "Record the result and test it in
+different ways.", score: 4 }, { text: "Compare with known answers and adjust your
+method.", score: 3 }, { text: "Ignore it and stick to the original plan.", score: 2
+}, { text: "Stop working on the project.", score: 1 } ] },
+{ question: "Your art teacher gives a theme: “Nature.” How do you
+approach it?", options: [ { text: "Create a completely unique interpretation.",
+score: 5 }, { text: "Add personal touches to a common nature scene.", score: 4 }, {
+text: "Reproduce a familiar picture with some changes.", score: 3 }, { text: "Copy
+a popular design from the internet.", score: 2 }, { text: "Submit something without
+much thought.", score: 1 } ] },
+
+{ question: "You’re working in a team where everyone’s ideas are
+similar. How do you contribute?", options: [ { text: "Suggest a new, out-of-the-box
+perspective.", score: 5 }, { text: "Build on someone’s idea and make it better.",
+score: 4 }, { text: "Agree with the existing ideas without adding much.", score: 3
+}, { text: "Follow the team’s plan without giving input.", score: 2 }, { text:
+"Avoid participating in the discussion.", score: 1 } ] }
+];
+let currentQuestionIndex = 0;
+let totalScore = 0;
+let sectionScores = {};
+let shuffledQuestions = [];
+let userData = {};
+const formContainer = document.getElementById('form-container');
+const quizContainer = document.getElementById('quiz-container');
+const reportContainer = document.getElementById('report-container');
+const userForm = document.getElementById('user-form');
+const questionText = document.getElementById('question-text');
+const optionsContainer = document.getElementById('options-container');
+const progressBarFill = document.getElementById('progress-bar-fill');
+const downloadPdfBtn = document.getElementById('download-pdf-btn');
+const retakeQuizBtn = document.getElementById('retake-quiz-btn');
+const emailPdfBtn = document.getElementById('email-pdf-btn');
+
+userForm.addEventListener('submit', (e) => {
+e.preventDefault();
+const formData = new FormData(userForm);
+userData.name = formData.get('name');
+userData.rollNumber = formData.get('roll-number');
+userData.email = formData.get('email');
+userData.phone = formData.get('phone');
+userData.dept = formData.get('dept');
+userData.section = formData.get('section');
+formContainer.classList.remove('active');
+quizContainer.classList.add('active', 'fade-in');
+startQuiz();
+});
+downloadPdfBtn.addEventListener('click', generatePDF);
+retakeQuizBtn.addEventListener('click', retakeQuiz);
+emailPdfBtn.addEventListener('click', prepareEmail);
+function prepareEmail() {
+const to = userData.email || '';
+const subject = encodeURIComponent(`Psychometric Report for
+${userData.name}`);
+const body = encodeURIComponent(
+
+`Hi ${userData.name},\n\nPlease find your psychometric report
+attached.\n\n(This email was prepared for you. Please attach the PDF from your
+'Downloads' folder before sending.)\n\nBest regards.`
+);
+const mailtoLink = `mailto:${to}?subject=${subject}&body=${body}`;
+window.open(mailtoLink, '_blank');
+}
+function retakeQuiz() {
+reportContainer.classList.remove('active');
+userForm.reset();
+formContainer.classList.add('active', 'fade-in');
+}
+function shuffleArray(array) {
+for (let i = array.length - 1; i > 0; i--) {
+const j = Math.floor(Math.random() * (i + 1));
+[array[i], array[j]] = [array[j], array[i]];
+}
+return array;
+}
+function startQuiz() {
+shuffledQuestions = shuffleArray(questions.map((q, i) => ({ ...q,
+originalIndex: i })));
+currentQuestionIndex = 0;
+totalScore = 0;
+sectionScores = {
+communication: 0,
+leadership: 0,
+problemSolving1: 0,
+timeManagement: 0,
+resilience: 0,
+problemSolving2: 0,
+selfDiscipline: 0,
+creativity: 0,
+};
+showQuestion();
+}
+function showQuestion() {
+const currentQuestion = shuffledQuestions[currentQuestionIndex];
+questionText.textContent = currentQuestion.question;
+optionsContainer.innerHTML = '';
+const shuffledOptions = shuffleArray([...currentQuestion.options]);
+shuffledOptions.forEach(option => {
+const button = document.createElement('button');
+button.textContent = option.text;
+
+button.classList.add('w-full', 'text-left', 'p-4', 'bg-gray-50',
+'rounded-lg', 'option-btn', 'font-medium', 'text-gray-700',
+'hover:text-indigo-600', 'border', 'border-gray-200');
+button.onclick = () => selectOption(option.score);
+optionsContainer.appendChild(button);
+});
+updateProgressBar();
+}
+function selectOption(selectedScore) {
+totalScore += selectedScore;
+const originalIndex =
+shuffledQuestions[currentQuestionIndex].originalIndex;
+if (originalIndex <= 4) sectionScores.communication += selectedScore;
+else if (originalIndex <= 9) sectionScores.leadership += selectedScore;
+else if (originalIndex <= 14) sectionScores.problemSolving1 +=
+selectedScore;
+else if (originalIndex <= 19) sectionScores.timeManagement +=
+selectedScore;
+else if (originalIndex <= 24) sectionScores.resilience +=
+selectedScore;
+else if (originalIndex <= 29) sectionScores.problemSolving2 +=
+selectedScore;
+else if (originalIndex <= 34) sectionScores.selfDiscipline +=
+selectedScore;
+else if (originalIndex <= 39) sectionScores.creativity +=
+selectedScore;
+currentQuestionIndex++;
+if (currentQuestionIndex < shuffledQuestions.length) {
+showQuestion();
+} else {
+showReport();
+}
+}
+function updateProgressBar() {
+const progress = ((currentQuestionIndex) / shuffledQuestions.length) *
+100;
+progressBarFill.style.width = `${progress}%`;
+}
+// --- Feedback Data ---
+const feedbackData = {
+communication: (score) => {
+let data = { title: "Communication Skills: Needs Improvement",
+feedback: "You may find it challenging to start or sustain conversations, possibly
+due to shyness, fear of judgment, or limited practice. This can impact your ability
+
+to share ideas and connect with others.", recommendations: ["Start with one-on-one
+conversations before engaging in group settings.", "Prepare simple
+self-introductions to use in new situations.", "Practice mirror speaking to improve
+comfort with facial expressions and gestures.", "Learn basic conversation starters
+to ease initial awkwardness.", "Observe confident speakers and note their
+techniques.", "Set small, measurable goals — for example, initiate one new
+conversation per day."] };
+if (score >= 21) data = { title: "Communication Skills: Excellent
+Communicator", feedback: "You have an exceptional ability to convey ideas,
+thoughts, and feelings with clarity and confidence. You listen actively, adapt your
+style to your audience, and maintain strong eye contact. You also balance speaking
+and listening, making others feel valued and understood.", recommendations:
+["Continue honing your active listening to maintain engagement.", "Explore public
+speaking opportunities (debates, presentations, workshops) to further polish your
+style.", "Mentor peers who struggle with communication — teaching reinforces your
+skill.", "Experiment with storytelling techniques to make your delivery more
+engaging.", "Keep expanding your vocabulary to add depth to your conversations.",
+"Maintain your balance between assertiveness and empathy."] };
+else if (score >= 16) data = { title: "Communication Skills: Good
+Communicator", feedback: "You communicate effectively in most situations, showing
+good clarity and confidence. However, there’s room to enhance expressiveness, body
+language, and emotional connection with your audience.", recommendations: ["Work on
+refining tone modulation to keep your audience engaged.", "Participate in group
+discussions and student forums to practice varied communication settings.", "Record
+and review your presentations to identify areas for improvement.", "Practice
+paraphrasing what others say to ensure understanding and show attentiveness.", "Use
+open-ended questions to encourage deeper conversations.", "Gradually increase
+exposure to speaking in unfamiliar or high-pressure situations."] };
+else if (score >= 11) data = { title: "Communication Skills:
+Average Communicator", feedback: "You can express your ideas, but sometimes
+struggle with clarity, confidence, or engagement. You may prefer safe, familiar
+conversations and avoid challenging communication situations.", recommendations:
+["Practice speaking in front of small, supportive groups before moving to larger
+audiences.", "Build confidence through positive self-talk before speaking
+engagements.", "Focus on structuring your thoughts before you speak — use a
+beginning, middle, and end.", "Engage in active listening exercises to strengthen
+connection with others.", "Take part in role-play activities to improve spontaneity
+in responses.", "Join a communication skills club (e.g., Toastmasters or campus
+speaking clubs)."] };
+return data;
+},
+leadership: (score) => {
+let data = { title: "Leadership Skills: Needs Improvement",
+feedback: "You may find it challenging to take initiative, make decisions, or
+influence others in group situations. This could stem from limited leadership
+experience, fear of making mistakes, or low confidence.", recommendations: ["Start
+with simple tasks like coordinating small activities or initiating group
+discussions.", "Set personal goals such as “I will contribute at least one
+suggestion in every meeting.”", "Practice decision-making by evaluating pros and
+cons before making small choices.", "Learn basic leadership frameworks such as
+
+SMART goals and team role allocation.", "Participate in role-play scenarios to
+practice giving direction and delegating tasks.", "Focus on building your
+confidence through consistent small successes."] };
+if (score >= 21) data = { title: "Leadership Skills: Strong
+Leader", feedback: "You demonstrate exceptional leadership qualities, consistently
+taking initiative, inspiring your peers, and ensuring tasks are completed
+effectively. You are confident in making decisions, delegating responsibilities,
+and motivating others to achieve common goals. Your leadership style is inclusive,
+ensuring every team member feels valued and heard.", recommendations: ["Continue
+developing your decision-making skills by analyzing both successes and
+challenges.", "Mentor or guide less experienced peers to strengthen your leadership
+influence.", "Participate in leadership workshops or student government to expand
+your experience.", "Explore different leadership styles (transformational,
+democratic, situational) to adapt to various scenarios.", "Keep balancing task
+focus with people focus — results and relationships go hand in hand.", "Take on
+challenging projects that push you beyond your comfort zone."] };
+else if (score >= 16) data = { title: "Leadership Skills: Good
+Leader", feedback: "You lead effectively when needed and can handle
+responsibilities well. However, you may sometimes wait for leadership opportunities
+instead of actively seeking them. Your decision-making is sound, and you can
+motivate others, but there’s room to be more proactive and visionary.",
+recommendations: ["Volunteer for leadership roles in clubs, events, or classroom
+projects instead of waiting to be asked.", "Practice setting a clear vision and
+communicating it to your team.", "Strengthen your conflict-resolution skills to
+handle disagreements productively.", "Seek feedback from your peers on your
+leadership approach and act on it.", "Read biographies or case studies of great
+leaders to learn new strategies.", "Take calculated risks to inspire innovation
+within your team."] };
+else if (score >= 11) data = { title: "Leadership Skills:
+Occasional Leader", feedback: "You tend to follow rather than lead, stepping up
+only when encouraged or when circumstances require it. You may hesitate to take
+charge due to self-doubt, lack of experience, or uncertainty about
+decision-making.", recommendations: ["Start by leading small group activities or
+projects to build confidence.", "Work on assertiveness skills to speak up and share
+your ideas in group discussions.", "Prepare action plans in advance so you feel
+more ready to lead when needed.", "Observe leaders you admire and note their
+strategies for managing people.", "Join workshops or simulations that focus on
+decision-making and leadership scenarios.", "Focus on building trust within a team
+so others naturally look to you for guidance."] };
+return data;
+},
+problemSolving1: (score) => {
+let data = { title: "Problem-Solving Skills: Needs Improvement",
+feedback: "You may often feel stuck when faced with challenges, possibly due to
+lack of confidence, limited planning skills, or difficulty analysing situations.
+This can lead to delays, missed opportunities, or incomplete solutions.",
+recommendations: ["Start with small, low-risk problems to gradually build
+problem-solving confidence.", "Learn and apply structured techniques such as the
+PDCA cycle (Plan–Do–Check–Act).", "Focus on improving your analytical skills by
+practicing logic puzzles or case analysis.", "Seek feedback from mentors or peers
+
+on how you handle challenges.", "Develop your decision-making skills by evaluating
+multiple options before acting.", "Build patience and resilience by seeing
+challenges as learning opportunities rather than threats."] };
+if (score >= 21) data = { title: "Problem-Solving Skills: Excellent
+Problem-Solver", feedback: "You possess outstanding problem-solving abilities,
+combining analytical thinking with quick decision-making. You can evaluate
+situations from multiple perspectives, identify root causes, and propose practical
+solutions efficiently. Your approach is both logical and creative, allowing you to
+address challenges with confidence. You also demonstrate adaptability, adjusting
+strategies when circumstances change.", recommendations: ["Continue refining your
+skills by tackling complex, real-world problems through case studies or
+simulations.", "Mentor others in structured problem-solving approaches, such as the
+5 Whys or Root Cause Analysis.", "Participate in hackathons, innovation challenges,
+or brainstorming workshops to stay sharp.", "Practice documenting your
+problem-solving process for future learning and reflection.", "Explore advanced
+tools such as SWOT analysis, decision matrices, or design thinking models.", "Keep
+building your resilience so you remain composed even under pressure."] };
+else if (score >= 16) data = { title: "Problem-Solving Skills: Good
+Problem-Solver", feedback: "You are effective at finding workable solutions and can
+think logically when faced with challenges. You assess situations well but may
+sometimes settle for the first acceptable solution instead of exploring more
+creative or innovative options.", recommendations: ["Before deciding, list at least
+three possible solutions and compare their pros and cons.", "Develop your
+creativity by practicing divergent thinking exercises (e.g., “What if”
+scenarios).", "Use structured methods like mind mapping or flowcharts to visualize
+and expand your options.", "Involve others in your process to gain fresh
+perspectives and uncover blind spots.", "Learn from mistakes by reflecting on what
+could have been done differently.", "Challenge yourself with unfamiliar problems to
+strengthen adaptability."] };
+else if (score >= 11) data = { title: "Problem-Solving Skills:
+Average Problem-Solver", feedback: "You can solve problems when required but may
+struggle to think beyond straightforward or familiar approaches. At times, you
+might lack persistence in tackling complex issues, or you may avoid risks in favor
+of safe solutions.", recommendations: ["Break larger problems into smaller,
+manageable parts to avoid feeling overwhelmed.", "Increase persistence by setting
+mini-deadlines and sticking to them until the challenge is resolved.", "Expand your
+knowledge base to have more resources and ideas to draw from.", "Practice
+role-playing different problem scenarios to improve adaptability.", "Keep a
+“problem–solution journal” to track past challenges and successful strategies.",
+"Experiment with brainstorming techniques to spark innovative thinking."] };
+return data;
+},
+timeManagement: (score) => {
+let data = { title: "Time Management: Needs Improvement", feedback:
+"You may struggle with staying organized, prioritizing tasks, and maintaining
+focus, leading to frequent delays and unfinished work. A lack of planning could be
+affecting your ability to meet goals and maintain consistency in performance.
+Without improvement, this could cause unnecessary stress and missed
+opportunities.", recommendations: ["Start by creating a simple, consistent daily
+routine and stick to it.", "Use a basic planner to list three priority tasks each
+
+day and ensure they are completed.", "Eliminate or reduce obvious time-wasters,
+such as excessive phone use during work time.", "Set small, realistic deadlines for
+every task rather than leaving them open-ended.", "Ask a peer, mentor, or teacher
+to hold you accountable for deadlines.", "Begin tasks as soon as they are assigned
+— avoid waiting until the last minute."] };
+if (score >= 21) data = { title: "Time Management: Excellent Time
+Manager", feedback: "You demonstrate exceptional discipline, organization, and
+focus in managing your time. You set clear priorities, avoid procrastination, and
+allocate resources effectively. Your ability to balance academic, personal, and
+extracurricular activities shows strong self-control and foresight. You
+consistently meet deadlines, adapt well to changes, and maintain productivity
+without burnout.", recommendations: ["Continue using planners, calendars, or
+digital tools to stay organized.", "Take on leadership roles in time-sensitive
+projects to further challenge your skills.", "Share your time management techniques
+with peers to reinforce your own habits.", "Maintain a healthy balance — ensure you
+schedule rest and recreation to avoid overwork.", "Experiment with time-blocking
+for deep work to enhance efficiency further.", "Regularly review and adjust your
+schedule to ensure continued alignment with your goals."] };
+else if (score >= 16) data = { title: "Time Management: Good Time
+Manager", feedback: "You manage your time well in most situations, meeting
+deadlines and completing tasks efficiently. However, there may be occasional lapses
+in consistency, such as underestimating task duration or overcommitting. While you
+balance priorities fairly well, refining your system could help you maximize
+productivity.", recommendations: ["Break down large tasks into smaller, more
+manageable steps to avoid last-minute rushes.", "Practice estimating the time
+needed for tasks more accurately.", "Review your daily schedule at the start and
+end of each day to stay on track.", "Use reminders or alarms for critical
+deadlines.", "Learn to say \"no\" to non-essential commitments that disrupt your
+priorities.", "Monitor and reduce time spent on distractions like social media
+during work hours."] };
+else if (score >= 11) data = { title: "Time Management: Average
+Time Manager", feedback: "You complete tasks but may often feel rushed, miss
+deadlines, or struggle with prioritization. You might be spending too much time on
+less important activities while neglecting critical ones. Procrastination or
+inconsistent planning could be affecting your overall productivity.",
+recommendations: ["Create a daily or weekly to-do list and rank tasks by importance
+and urgency.", "Set specific, time-bound goals for each study or work session.",
+"Identify your peak productivity hours and schedule important tasks during that
+time.", "Use the Pomodoro Technique to improve focus and reduce procrastination.",
+"Track where your time goes each day to identify and eliminate time-wasters.",
+"Commit to completing one high-priority task before moving to smaller ones."] };
+return data;
+},
+resilience: (score) => {
+let data = { title: "Resilience: Low Resilience", feedback: "You
+may find it hard to cope with stress, uncertainty, and setbacks. Challenges might
+feel overwhelming, leading to avoidance or emotional burnout. Low resilience can
+limit your academic performance, relationships, and confidence in handling life
+changes. However, resilience can be built with consistent effort and practice.",
+recommendations: ["Learn emotional regulation techniques such as mindfulness,
+
+breathing exercises, or guided meditation.", "Seek support from mentors,
+counselors, or peer groups to navigate challenges.", "Build a daily habit of
+gratitude to shift focus toward positive aspects of life.", "Develop structured
+problem-solving skills – define the problem, brainstorm options, test solutions,
+and review results.", "Expose yourself gradually to small, manageable challenges to
+build adaptability over time."] };
+if (score >= 21) data = { title: "Resilience: Highly Resilient",
+feedback: "You demonstrate exceptional emotional strength and adaptability. You
+stay calm under stress, bounce back quickly from setbacks, and maintain a positive
+outlook even in tough situations. Your ability to see challenges as opportunities
+allows you to grow rather than break under pressure. You are also proactive in
+finding solutions and can inspire others with your persistence.", recommendations:
+["Continue practicing mindfulness or meditation to maintain your emotional
+balance.", "Mentor peers who may struggle with stress to reinforce your resilience
+skills.", "Keep a “lessons learned” journal to reflect on challenges and how you
+overcame them.", "Take on leadership roles in high-pressure group projects to
+leverage your calm under stress."] };
+else if (score >= 16) data = { title: "Resilience: Resilient",
+feedback: "You have a solid ability to manage challenges and stress effectively,
+but there’s room to strengthen your coping strategies. You adapt reasonably well to
+changes, though some setbacks may leave you feeling temporarily stuck. Your
+optimism is good, but you could benefit from building deeper emotional endurance.",
+recommendations: ["Practice stress inoculation techniques by gradually exposing
+yourself to challenging situations.", "Develop a toolbox of coping strategies (deep
+breathing, journaling, physical activity).", "Seek constructive feedback from
+mentors or peers on how you handle pressure.", "Work on improving flexibility in
+problem-solving so that you can quickly adapt to changing scenarios."] };
+else if (score >= 11) data = { title: "Resilience: Moderate
+Resilience", feedback: "You can manage daily stress but may feel overwhelmed when
+unexpected challenges arise. Your recovery time from setbacks may be slow, and at
+times you may dwell on negative outcomes. This can affect your motivation and
+decision-making. You have the potential to improve by practicing adaptive thinking
+and reframing challenges more positively.", recommendations: ["Start using the
+“What’s in my control?” approach to focus energy on what you can change.", "Break
+large challenges into smaller, manageable steps to avoid feeling stuck.", "Engage
+in physical activities or hobbies that recharge you mentally and physically.",
+"Work on emotional reframing – consciously replace negative thoughts with
+constructive ones."] };
+return data;
+},
+problemSolving2: (score) => {
+let data = { title: "Detailed Problem-Solving: Struggles with
+Problem-Solving", feedback: "You may find problem-solving stressful and often feel
+stuck or unsure about how to start. This can result in delayed or ineffective
+decisions, especially under pressure. Your approach may lack structure, and
+confidence in your own solutions may be low.", recommendations: ["Start by breaking
+problems into smaller, manageable parts to avoid feeling overwhelmed.", "Seek
+feedback from experienced colleagues or mentors to refine your approach.", "Engage
+in critical thinking training and real-life case studies to gradually build skill
+and confidence.", "Keep a “decision journal” to reflect on what worked, what
+
+didn’t, and how to improve next time."] };
+if (score >= 21) data = { title: "Detailed Problem-Solving:
+Excellent Problem-Solver", feedback: "You have a highly developed ability to
+identify problems, analyze root causes, and generate effective solutions quickly.
+You remain calm under pressure, consider multiple perspectives, and make
+well-informed decisions. You demonstrate creativity in finding alternatives and
+follow through until challenges are resolved.", recommendations: ["Continue
+practicing innovative thinking techniques such as mind mapping or SCAMPER to keep
+your solutions fresh and creative.", "Mentor teammates on structured
+problem-solving frameworks like PDCA (Plan–Do–Check–Act) or 5 Whys to uplift the
+whole team’s capability.", "Participate in cross-functional projects to expand your
+experience with varied challenges."] };
+else if (score >= 16) data = { title: "Detailed Problem-Solving:
+Strong Problem-Solver", feedback: "You are capable of resolving most issues
+effectively and logically. You are resourceful and generally make sound decisions
+but may occasionally take more time to act or miss creative opportunities. Under
+pressure, you may prefer proven methods over unconventional approaches.",
+recommendations: ["Work on decision-making speed by setting time limits for certain
+problem-solving steps.", "Practice creative brainstorming without self-censoring
+ideas initially.", "Take on small, calculated risks in problem-solving to expand
+your comfort zone and adaptability."] };
+else if (score >= 11) data = { title: "Detailed Problem-Solving:
+Average Problem-Solver", feedback: "You can solve routine issues but may feel
+uncertain when faced with complex, unfamiliar, or high-pressure problems. You tend
+to rely on others for guidance, which can slow decision-making. Your solutions may
+lack depth or structure, and persistence may drop when initial attempts fail.",
+recommendations: ["Learn and apply structured problem-solving models like SWOT
+Analysis or Root Cause Analysis.", "Build persistence by setting step-by-step
+action plans and reviewing progress regularly.", "Practice scenario-based
+decision-making exercises to strengthen analytical and critical thinking skills."]
+};
+return data;
+},
+selfDiscipline: (score) => {
+let data = { title: "Self-Discipline: Weak Self-Discipline",
+feedback: "You may struggle to maintain focus, consistency, and organization in
+your tasks. Delays, missed deadlines, and incomplete projects might be common. A
+lack of structured planning and difficulty resisting distractions could be limiting
+your personal and professional growth.", recommendations: ["Start with basic
+habit-building techniques — set one or two daily non-negotiable tasks and stick to
+them.", "Use reminders, alarms, or accountability partners to keep yourself on
+track.", "Learn time management basics like prioritizing urgent vs. important
+tasks.", "Begin with short, focused work sessions (10–15 minutes) and gradually
+extend them as your discipline strengthens.", "Reflect daily on your progress and
+areas for improvement."] };
+if (score >= 21) data = { title: "Self-Discipline: Excellent
+Self-Discipline", feedback: "You demonstrate exceptional consistency, reliability,
+and organization in your work and personal commitments. You follow through on
+plans, resist distractions, and maintain focus even during challenging situations.
+Your strong sense of responsibility and self-control allows you to achieve
+
+long-term goals without losing momentum.", recommendations: ["Continue to set
+challenging yet realistic goals to maintain motivation and growth.", "Share your
+strategies for time and task management with peers to inspire discipline in
+others.", "Experiment with advanced productivity tools (e.g., Notion, Trello, or
+Asana) to further optimize workflows.", "Avoid overloading yourself — balance
+discipline with flexibility to prevent burnout."] };
+else if (score >= 16) data = { title: "Self-Discipline: Good
+Self-Discipline", feedback: "You are generally dependable and organized, managing
+most commitments effectively. However, occasional lapses in planning or persistence
+may cause delays in achieving goals. You can handle distractions reasonably well
+but may not always maintain consistency in long-term projects.", recommendations:
+["Strengthen planning skills by creating detailed daily/weekly action plans and
+tracking progress.", "Use techniques like the Pomodoro Technique or time-blocking
+to boost focus.", "Identify situations where discipline slips (e.g., late starts,
+procrastination triggers) and create counter-strategies.", "Regularly review goals
+to stay aligned with priorities."] };
+else if (score >= 11) data = { title: "Self-Discipline: Moderate
+Self-Discipline", feedback: "Your commitment to tasks can be inconsistent,
+especially when facing distractions or challenges. You may start with enthusiasm
+but struggle to follow through until completion. Time management may need
+improvement, and procrastination might affect results.", recommendations: ["Build
+strong daily routines to create automatic discipline habits.", "Break big goals
+into smaller, achievable steps to maintain momentum.", "Limit distractions by
+setting specific work zones and tech boundaries.", "Practice self-accountability —
+track progress daily and celebrate small wins."] };
+return data;
+},
+creativity: (score) => {
+let data = { title: "Creativity: Low Creativity", feedback: "You
+tend to approach problems in a very logical, linear way, which can limit your
+ability to innovate. While reliability and structure are your strengths, the modern
+workplace values adaptability and fresh thinking. Your creative capacity can grow
+significantly with exposure, practice, and a shift in mindset.", recommendations:
+["Dedicate time to learning creative problem-solving frameworks.", "Surround
+yourself with creative people and observe how they approach challenges.", "Engage
+in hobbies that require imagination – painting, music, writing, or building
+projects.", "Practice “what if” thinking daily – ask hypothetical questions to open
+new thought pathways.", "Embrace mistakes as learning opportunities; fear of
+failure often blocks creativity."] };
+if (score >= 21) data = { title: "Creativity: Highly Creative",
+feedback: "You have a remarkable ability to generate original ideas, connect
+unrelated concepts, and approach challenges from multiple angles. Your thinking
+style often inspires others and drives innovation in group settings. You naturally
+explore “what could be” rather than sticking to “what has been,” making you a
+valuable contributor in problem-solving and brainstorming environments.",
+recommendations: ["Continue to expose yourself to diverse sources of inspiration –
+art, books, cultures, and industries beyond your field.", "Collaborate with other
+creative thinkers to refine and scale your ideas.", "Document your creative process
+to make it repeatable.", "Balance creativity with practical execution plans so that
+your ideas can move from concept to reality."] };
+
+else if (score >= 16) data = { title: "Creativity: Creative",
+feedback: "You have a good level of creative thinking and can provide unique
+insights when needed. However, at times, you may rely on familiar patterns or stop
+short of exploring unconventional solutions. Your creative spark is present but
+could benefit from consistent practice and pushing beyond your comfort zone.",
+recommendations: ["Set aside regular time for “idea sprints” where you explore wild
+and unconventional solutions without judgment.", "Use creative tools like mind
+mapping, SCAMPER technique, or “reverse thinking” exercises to expand your
+ideation.", "Challenge yourself to come up with at least three alternative
+solutions for every problem.", "Seek feedback from peers to refine your ideas and
+test them in real-life scenarios."] };
+else if (score >= 11) data = { title: "Creativity: Moderately
+Creative", feedback: "You tend to stick to tried-and-tested approaches, which
+ensures stability but limits innovation. While you can contribute useful ideas, you
+may find it challenging to think beyond standard solutions. With deliberate effort,
+you can unlock a more imaginative and open mindset.", recommendations: ["Engage in
+activities that stimulate creative thinking, such as storytelling, improv games, or
+design challenges.", "Break routine by working in new environments or with
+different teams.", "Practice “question storming” instead of just brainstorming –
+asking unusual questions about a problem can lead to fresh ideas.", "Take small
+creative risks regularly to build confidence in thinking differently."] };
+return data;
+}
+};
+
+function showReport() {
+quizContainer.classList.remove('active');
+reportContainer.classList.add('active', 'fade-in');
+const userDetailsContainer =
+document.getElementById('user-details-container');
+userDetailsContainer.innerHTML = `
+<div class="grid grid-cols-2 gap-x-8 gap-y-2">
+<p><strong>Name:</strong> ${userData.name || 'N/A'}</p>
+<p><strong>Roll Number:</strong> ${userData.rollNumber ||
+'N/A'}</p>
+<p id="report-email-line"><strong>Email:</strong>
+${userData.email || 'N/A'}</p>
+<p><strong>Phone:</strong> ${userData.phone || 'N/A'}</p>
+<p><strong>Department:</strong> ${userData.dept || 'N/A'}</p>
+<p><strong>Section:</strong> ${userData.section || 'N/A'}</p>
+</div>
+`;
+
+const maxScore = questions.length * 5;
+const percentageScore = Math.round((totalScore / maxScore) * 100);
+const finalScoreEl = document.getElementById('final-score');
+
+const scoreCircle = document.getElementById('score-circle');
+finalScoreEl.textContent = percentageScore;
+const circumference = 2 * Math.PI * 15.9155;
+const offset = circumference - (percentageScore / 100) * circumference;
+scoreCircle.style.strokeDasharray = `${circumference}`;
+scoreCircle.style.strokeDashoffset = `${circumference}`;
+setTimeout(() => {
+scoreCircle.style.transition = 'stroke-dashoffset 1.5s
+cubic-bezier(0.65, 0, 0.35, 1)';
+scoreCircle.style.strokeDashoffset = offset;
+}, 100);
+const reportTitle = document.getElementById('report-title');
+const reportFeedback = document.getElementById('report-feedback');
+const reportRecommendations =
+document.getElementById('report-recommendations');
+let overallReportData;
+if (totalScore >= 181) {
+overallReportData = { title: "Outstanding Achiever", feedback: "You
+demonstrate exceptional mastery in teamwork and collaboration. You are not only a
+reliable contributor but also a catalyst for group success. Your adaptability,
+leadership, creativity, and problem-solving skills inspire those around you. You
+excel in both leading and following, creating harmony while driving results.",
+recommendations: ["Take on leadership roles in challenging academic, community, or
+professional projects.", "Mentor juniors and peers, sharing your strategies for
+collaboration and problem-solving.", "Participate in inter-college competitions,
+hackathons, or leadership summits to showcase and sharpen your skills.", "Seek
+international exposure through exchange programs or online global projects.",
+"Document your teamwork experiences to inspire others and refine your approach."]
+};
+} else if (totalScore >= 161) {
+overallReportData = { title: "High Performer", feedback: "You have
+a strong and consistent command of teamwork skills, with only minor areas for
+growth. You adapt quickly, communicate well, and can be relied upon to perform
+under pressure. You are close to becoming an outstanding achiever with focused
+effort on specific areas.", recommendations: ["Pinpoint your two lowest-scoring
+traits and create a 30-day improvement plan.", "Volunteer for cross-department or
+inter-disciplinary projects to broaden your adaptability.", "Engage in peer
+feedback sessions to fine-tune interpersonal and conflict-resolution skills.",
+"Practice leading small groups in time-bound challenges to boost efficiency."] };
+} else if (totalScore >= 141) {
+overallReportData = { title: "Above Average", feedback: "You have a
+solid foundation in teamwork. You contribute effectively in most situations but may
+show occasional inconsistencies, especially under high-stress or unfamiliar
+conditions. With more exposure to diverse team setups, your performance will become
+more consistent.", recommendations: ["Rotate different roles in team activities
+
+(leader, coordinator, analyst, supporter).", "Maintain a growth journal to track
+improvements and challenges.", "Participate in workshops on problem-solving,
+negotiation, and adaptability.", "Take feedback positively and turn it into
+actionable steps."] };
+} else if (totalScore >= 121) {
+overallReportData = { title: "Moderate Performer", feedback: "You
+meet basic teamwork requirements but need consistent effort to keep pace with
+academic and professional expectations. Several traits may require structured
+development to achieve balance.", recommendations: ["Identify your three weakest
+traits and work on one at a time.", "Join structured team challenges (case studies,
+project simulations).", "Seek a mentor or accountability partner to provide
+constructive feedback.", "Practice time-bound group problem-solving to boost
+decision-making speed."] };
+} else if (totalScore >= 101) {
+overallReportData = { title: "Needs Improvement", feedback: "You
+have potential, but gaps in your teamwork approach limit your contribution.
+Inconsistency, low adaptability, or poor communication might be affecting your
+impact.", recommendations: ["Enroll in team-building workshops or soft skills
+courses.", "Start with small group projects where you can gradually build
+confidence.", "Improve time management and self-discipline to increase
+dependability.", "Shadow a strong team player to learn effective collaboration
+habits."] };
+} else { // 40-100
+overallReportData = { title: "Significant Development Needed",
+feedback: "Your current teamwork skills require major improvement to succeed in
+academic or professional environments. Most traits need active development before
+you can thrive in group settings.", recommendations: ["Begin with low-pressure,
+small-team tasks to practice collaboration basics.", "Join skill-building clubs or
+community groups where you can observe and learn from others.", "Focus on building
+one strong habit at a time (listening, punctuality, clear communication).", "Track
+progress weekly and seek regular feedback from trusted mentors or peers."] };
+}
+reportTitle.textContent = overallReportData.title;
+reportFeedback.textContent = overallReportData.feedback;
+reportRecommendations.innerHTML =
+overallReportData.recommendations.map(rec => `<li>${rec}</li>`).join('');
+// --- Populate Page 2 Content ---
+const detailedContent =
+document.getElementById('detailed-analysis-content');
+detailedContent.innerHTML = ''; // Clear previous content
+const sectionDataMap = [
+{ data: feedbackData.communication(sectionScores.communication),
+score: sectionScores.communication },
+{ data: feedbackData.leadership(sectionScores.leadership), score:
+sectionScores.leadership },
+{ data:
+feedbackData.problemSolving1(sectionScores.problemSolving1), score:
+
+sectionScores.problemSolving1 },
+{ data: feedbackData.timeManagement(sectionScores.timeManagement),
+score: sectionScores.timeManagement },
+{ data: feedbackData.resilience(sectionScores.resilience), score:
+sectionScores.resilience },
+{ data:
+feedbackData.problemSolving2(sectionScores.problemSolving2), score:
+sectionScores.problemSolving2 },
+{ data: feedbackData.selfDiscipline(sectionScores.selfDiscipline),
+score: sectionScores.selfDiscipline },
+{ data: feedbackData.creativity(sectionScores.creativity), score:
+sectionScores.creativity },
+];
+sectionDataMap.forEach(item => {
+const sectionDiv = document.createElement('div');
+sectionDiv.className = 'p-4 border border-gray-200 rounded-lg
+section-for-pdf';
+const maxSectionScore = 25;
+sectionDiv.innerHTML = `
+<div class="flex justify-between items-center mb-2">
+<h3 class="text-2xl font-bold
+text-gray-800">${item.data.title}</h3>
+<span class="text-xl font-bold text-indigo-600">Score:
+${item.score}/${maxSectionScore}</span>
+</div>
+<p class="font-semibold text-gray-800 text-lg
+mt-2">Feedback:</p>
+<p class="text-gray-700 mb-3
+text-base">${item.data.feedback}</p>
+<p class="font-semibold text-gray-800
+text-lg">Recommendations:</p>
+<ul class="list-disc list-inside text-gray-700 space-y-1
+text-base">
+${item.data.recommendations.map(rec =>
+`<li>${rec}</li>`).join('')}
+</ul>
+`;
+detailedContent.appendChild(sectionDiv);
+});
+
+// Automatically trigger PDF download after a short delay to allow
+content to render
+setTimeout(generatePDF, 2000);
+}
+async function generatePDF() {
+const reportElement = document.getElementById('report-content-to-pdf');
+const page2Container =
+
+document.getElementById('report-page-2-container');
+const buttonContainer =
+reportElement.querySelector('.mt-10.text-center');
+buttonContainer.style.display = 'none';
+// --- Page 1 Clone ---
+const clone1 = reportElement.cloneNode(true);
+clone1.style.position = 'absolute';
+clone1.style.left = '-9999px';
+clone1.style.top = '0';
+clone1.style.width = reportElement.offsetWidth + 'px';
+clone1.classList.remove('bg-white/80', 'backdrop-blur-xl');
+clone1.classList.add('bg-white');
+const reportContentClone1 = clone1.querySelector('#report-content');
+if (reportContentClone1) {
+reportContentClone1.classList.remove('slide-in-up', 'opacity-0');
+reportContentClone1.style.opacity = '1';
+reportContentClone1.style.transform = 'translateY(0)';
+}
+document.body.appendChild(clone1);
+try {
+// --- Canvas for Page 1 ---
+const canvas1 = await html2canvas(clone1, { scale: 3, useCORS:
+true, backgroundColor: '#ffffff' });
+const imgData1 = canvas1.toDataURL('image/jpeg', 0.9);
+const pdf = new jsPDF('p', 'mm', 'a4');
+const pdfWidth = pdf.internal.pageSize.getWidth();
+const pdfHeight = pdf.internal.pageSize.getHeight();
+const ratio1 = canvas1.width / canvas1.height;
+const imgHeight1 = pdfWidth / ratio1;
+pdf.addImage(imgData1, 'JPEG', 0, 0, pdfWidth, imgHeight1);
+// --- Add clickable link to Page 1 ---
+const emailLineElement =
+clone1.querySelector('#report-email-line');
+if (userData.email && emailLineElement) {
+const emailRect = emailLineElement.getBoundingClientRect();
+const cloneRect = clone1.getBoundingClientRect();
+const x_ratio = pdfWidth / clone1.offsetWidth;
+const y_ratio = imgHeight1 / clone1.offsetHeight;
+const pdfX = (emailRect.left - cloneRect.left) * x_ratio;
+const pdfY = (emailRect.top - cloneRect.top) * y_ratio;
+
+const pdfLinkWidth = emailRect.width * x_ratio;
+const pdfLinkHeight = emailRect.height * y_ratio;
+const mailtoLink =
+`mailto:${userData.email}?subject=${encodeURIComponent(`Psychometric Report for
+${userData.name}`)}&body=${encodeURIComponent('Hi,\n\nPlease see the attached
+report.\n\nBest regards.')}`;
+pdf.link(pdfX, pdfY, pdfLinkWidth, pdfLinkHeight, { url:
+mailtoLink });
+}
+// --- Canvases for Page 2+ (Detailed Analysis) ---
+const allSections =
+Array.from(page2Container.querySelector('#detailed-analysis-content').children);
+const sectionsInChunks = [];
+for (let i = 0; i < allSections.length; i += 2) {
+sectionsInChunks.push(allSections.slice(i, i + 2));
+}
+for (const chunk of sectionsInChunks) {
+pdf.addPage();
+const tempPageContainer = document.createElement('div');
+tempPageContainer.style.position = 'absolute';
+tempPageContainer.style.left = '-9999px';
+tempPageContainer.style.top = '0';
+tempPageContainer.style.background = 'white';
+tempPageContainer.style.padding = '2rem';
+tempPageContainer.style.fontFamily = "'Manrope', sans-serif";
+tempPageContainer.style.width = '800px'; // Use a fixed width
+for consistent rendering
+tempPageContainer.style.display = 'flex';
+tempPageContainer.style.flexDirection = 'column';
+tempPageContainer.style.gap = '1.5rem';
+const titleElement =
+page2Container.querySelector('h2').cloneNode(true);
+titleElement.style.textAlign = 'center';
+titleElement.style.width = '100%';
+tempPageContainer.appendChild(titleElement);
+for (const section of chunk) {
+tempPageContainer.appendChild(section.cloneNode(true));
+}
+document.body.appendChild(tempPageContainer);
+const pageCanvas = await html2canvas(tempPageContainer, {
+scale: 3, useCORS: true, backgroundColor: '#ffffff'});
+const pageImgData = pageCanvas.toDataURL('image/jpeg', 0.9);
+
+const pageRatio = pageCanvas.width / pageCanvas.height;
+const pageImgHeight = pdfWidth / pageRatio;
+if (pageImgHeight > pdfHeight) {
+const adjustedHeight = pdfHeight - 20;
+const adjustedWidth = adjustedHeight * pageRatio;
+pdf.addImage(pageImgData, 'JPEG', (pdfWidth -
+adjustedWidth) / 2, 10, adjustedWidth, adjustedHeight);
+} else {
+pdf.addImage(pageImgData, 'JPEG', 0, 10, pdfWidth,
+pageImgHeight);
+}
+document.body.removeChild(tempPageContainer);
+}
+
+const fileName = `Psychometric_Report_${userData.name.replace(/ /g,
+'_')}.pdf`;
+pdf.save(fileName);
+} catch (err) {
+console.error("Error generating PDF:", err);
+} finally {
+document.body.removeChild(clone1);
+buttonContainer.style.display = 'block';
+}
+}
+</script>
+</body>
+</html>
